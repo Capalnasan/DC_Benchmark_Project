@@ -28,7 +28,7 @@ class BenchmarkApp(tk.Tk):
         frm = ttk.Frame(self)
         frm.pack(padx=20, pady=10, fill='x', expand=True)
 
-        for i, (label, module_path) in enumerate(BENCHMARKS):
+        for label, module_path in BENCHMARKS:
             b = ttk.Button(frm, text=label, command=lambda m=module_path, l=label: self.run_benchmark(m, l))
             b.pack(fill='x', pady=6)
 
@@ -59,14 +59,11 @@ class BenchmarkApp(tk.Tk):
             self.set_progress_indeterminate(False)
             self.progress['value'] = 100
             self.status_var.set(f"{label} completed!")
-            messagebox.showinfo("Result", f"{label}:
-
-{result}")
+            messagebox.showinfo("Result", f"{label}:\n\n{result}")
         except Exception as e:
             self.set_progress_indeterminate(False)
             self.status_var.set("Error!")
-            messagebox.showerror("Benchmark Error", f"{label} failed:
-{e}")
+            messagebox.showerror("Benchmark Error", f"{label} failed:\n{e}")
 
     def set_progress_indeterminate(self, enable=True):
         if enable:
